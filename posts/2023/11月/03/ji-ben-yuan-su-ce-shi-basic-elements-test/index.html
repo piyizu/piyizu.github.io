@@ -20,21 +20,24 @@
   </head>
 
   <body>
-    <p id="back-to-top"><a href="#top">返回顶部</a></p>
+
+    <p id="back-to-top"><a href="#top" alt="返回顶部">
+      <img border="0" src="https://piyizu.github.io/theme/backtotop.gif" />
+    </a></p>
     <script type="text/javascript">
       $(function(){
         //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
         $(function () {
             $(window).scroll(function(){
                 if ($(window).scrollTop()>100){
-                    $("#back-to-top").fadeIn(1500);
+                    $("#back-to-top").fadeIn(500);
                 }
                 else
                 {
-                    $("#back-to-top").fadeOut(1500);
+                    $("#back-to-top").fadeOut(500);
                 }
             });
- 
+
             //当点击跳转链接后，回到页面顶部位置
             $("#back-to-top").click(function(){
                 if ($('html').scrollTop()) {
@@ -47,7 +50,7 @@
         });
     });
     </script>
-    
+
     <div class="container">
       <div class="row">
         <div class="span9">
