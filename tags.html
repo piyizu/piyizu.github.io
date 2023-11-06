@@ -8,15 +8,46 @@
     <link rel="stylesheet" type="text/css" href="https://piyizu.github.io/theme/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="https://piyizu.github.io/theme/pastie.css" />
     <link rel="stylesheet" type="text/css" href="https://piyizu.github.io/theme/tablefix.css" />
+    <link rel="stylesheet" type="text/css" href="https://piyizu.github.io/theme/backtotop.css" />
     <link href="https://piyizu.github.io/" type="application/atom+xml" rel="alternate" title="Py Atom Feed" />
 
 
     <script type="text/javascript" src="https://piyizu.github.io/stjs/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
     </script>
+    <script type="text/javascript" src="https://piyizu.github.io/stjs/jquery-3.7.1.min.js">
+    </script>
 
   </head>
 
   <body>
+    <p id="back-to-top"><a href="#top">返回顶部</a></p>
+    <script type="text/javascript">
+      $(function(){
+        //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+        $(function () {
+            $(window).scroll(function(){
+                if ($(window).scrollTop()>100){
+                    $("#back-to-top").fadeIn(1500);
+                }
+                else
+                {
+                    $("#back-to-top").fadeOut(1500);
+                }
+            });
+ 
+            //当点击跳转链接后，回到页面顶部位置
+            $("#back-to-top").click(function(){
+                if ($('html').scrollTop()) {
+                    $('html').animate({ scrollTop: 0 }, 100);//动画效果
+                    return false;
+                }
+                $('body').animate({ scrollTop: 0 }, 100);
+                return false;
+            });
+        });
+    });
+    </script>
+    
     <div class="container">
       <div class="row">
         <div class="span9">
@@ -40,10 +71,12 @@
               <li class="active"
 ><a href="https://piyizu.github.io/tags">标签</a></li>
               <li ><a href="https://piyizu.github.io/archives">归档</a></li>
+              <li class="nav-header">资料信息</li>
+              <li><a href="https://piyizu.github.io/pages/ge-ren-jian-jie-about-me/">个人简介 - About me</a></li>
               <li class="nav-header">与我联系</li>
               <li><a href="mailto:1729403632@qq.com" target="_blank">通过电子邮件与我联系 - Email me</a></li>
               <li><a href="#" target="_blank">我的QQ账号是：1729403632</a></li>
-              <li class="nav-header">相关链接</li>
+              <li class="nav-header">推荐访问</li>
               <li><a href="https://getpelican.com/" target="_blank">Pelican</a></li>
               <li><a href="https://www.python.org/" target="_blank">Python</a></li>
               <li><a href="https://palletsprojects.com/p/jinja/" target="_blank">Jinja2</a></li>
