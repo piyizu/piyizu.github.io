@@ -107,37 +107,34 @@ div.entry-content p {
     text-align: justify;
 }
 
-html {
-    font-family: Arial, Helvetica, sans-serif;
+div.entry-content img {
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 500px;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
+div.entry-content img.width-100px { width: 100px; }
+div.entry-content img.width-200px { width: 200px; }
+div.entry-content img.width-300px { width: 300px; }
+div.entry-content img.width-400px { width: 400px; }
+
+div.entry-content p.caption-of-img-or-table {
+    text-align: center;
+    text-indent: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: Arial, Helvetica, sans-serif;
+div.article-content p, div.page-content p {
+    text-indent: 30px;
 }
 
-p {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 19px;
-}
-
-p.meta {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-tbody {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 19px;
-}
-
-#id_footer_pagebottom p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
-}
-
-.katex-display {
-    font-size: 18px;
-}
+html { font-family: Arial, Helvetica, sans-serif; }
+body { font-family: Arial, Helvetica, sans-serif; }
+h1, h2, h3, h4, h5, h6 { font-family: Arial, Helvetica, sans-serif; }
+p { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 19px; }
+p.meta { font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+tbody { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 19px;}
+#id_footer_pagebottom p { font-family: Arial, Helvetica, sans-serif; font-size: 17px; }
+div.entry-content p.caption-of-img-or-table { font-family: Arial, Helvetica, sans-serif; font-size: 18px;}
+.katex-display { font-size: 18px; }
