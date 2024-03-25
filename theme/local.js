@@ -7,4 +7,4 @@ window.onscroll = function() {
     else {
       backtotop_link.style.display = "none";
     }
-  }
+}

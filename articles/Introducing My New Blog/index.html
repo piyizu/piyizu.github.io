@@ -20,7 +20,7 @@
     <ul class="nav nav-tabs">
         <li  > <a class="brand" href="/">Piyi's Blog</a> </li>
 
-              <li><a href="/pages/about.html">About</a></li>
+              <li><a href="/pages/About/index.html">About</a></li>
 
         <li class="topmenubar-rightmost" id="li_back_to_top"> <a href="#">Back To Top</a> </li>
 
@@ -34,9 +34,9 @@
             <ul class="nav nav-list">
               <li class="nav-header">Navigate the Blog</li>
               <li ><a href="/">Home</a></li>
-              <li ><a href="/tags">Tags</a></li>
-              <li ><a href="/archives">Archives</a></li>
-              <li ><a href="/categories">Categories</a></li>
+              <li ><a href="/tags.html">Tags</a></li>
+              <li ><a href="/archives.html">Archives</a></li>
+              <li ><a href="/categories.html">Categories</a></li>
 
 
 
@@ -59,9 +59,18 @@
     <div class="header">
         <h1>Introducing My New Blog</h1>
     </div>
+
+    <link rel="stylesheet" href="/static_js/katex/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer type="text/javascript" src="/static_js/katex/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer type="text/javascript" src="/static_js/katex/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    <script defer type="text/javascript" src="/static_js/katex/katex_config.js"></script>
+
     <p class="meta"><small>
-<span>Author: <a href="/author/piyi-zu/">Piyi Zu</a></span><br />        <span>Release Time: 2024-03-24T22:13+0800</span><br />
-<span class="tags">Tag(s): <a href="/tag/blog/">blog</a></span><br /><span class="categories">Category: <a href="/category/miscellaneous.html">Miscellaneous</a></span><br />    </small></p>
+<span>Author: <a href="/author/piyi-zu.html">Piyi Zu</a></span><br />        <span>Release Time: 2024-03-25T20:25+0800</span><br />
+<span class="tags">Tag(s): <a href="/tag/blog.html">blog</a></span><br /><span class="categories">Category: <a href="/category/miscellaneous.html">Miscellaneous</a></span><br />    </small></p>
 
     	<nav class="toc"><h2>Table of Contents</h2>
     	<div class="toc">
@@ -82,11 +91,6 @@
 
         <div class="entry-content article-content">
         
-<p><link crossorigin="anonymous" href="/static_js/katex/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" rel="stylesheet"/></p>
-<!-- The loading of KaTeX is deferred to speed up page rendering -->
-<script crossorigin="anonymous" defer="" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" src="/static_js/katex/katex.min.js"></script>
-<!-- To automatically render math in text elements, include the auto-render extension: -->
-<script crossorigin="anonymous" defer="" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" onload="renderMathInElement(document.body);" src="/static_js/katex/contrib/auto-render.min.js"></script>
 <h2 id="on-the-blog-and-me">On the Blog and Me</h2>
 <p>I've been writing things on blogs since 8 years ago, when I was just a junior high school student. This blog is just a new one running on Github Pages. My old blog, which I haven't updated for years, can be found <a href="https://www.cnblogs.com/mrblug" target="_blank">here</a>.</p>
 <p>I used Mr.Blug as the nickname. Now I put my true name on the new blog so that you can identify me in a second.</p>
@@ -101,8 +105,8 @@
 <p>Click <a href="https://www.eicar.org/download-anti-malware-testfile/" target="_blank">here</a> to open an external link. It's EICAR virus test files download page! You can download those files to test your antimalware! Haven't heard of computer virus for a long time? <strong>Be careful when downloading a file from the Internet</strong>, as the virus is less conspicuous and is not yet extinct.</p>
 <h2 id="will-math-formulae-be-correctly-displayed">Will Math Formulae Be Correctly Displayed?</h2>
 <p>Don't worry about this problem. If the javascripts are loaded and enabled, nothing will go wrong <sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>:</p>
-<p>$$ax^2+bx+c=0,  a\neq0$$
-$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$ </p>
+<p>$$ax^2+bx+c=0,  a\neq0\tag{a.1}$$
+$$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\tag{a.2}$$ </p>
 <table>
 <thead>
 <tr>
@@ -152,11 +156,11 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$ </p>
 <p>[hh] is a 2-digit hour number ranging from 0 to 23.</p>
 <p>[mm] represents a 2-digit minute and [ss] refers to a 2-digit second. </p>
 <p>Letter 'T' is a separator between date and time, indicating the start of a time.</p>
-<p>[+-] can be either '+' or '-', indicating the difference of the local time from UTC. For example, I am now in China, and my local time is 8 hours plus UTC(If it's 01:00 in UTC at present, it should be 09:00 in my local timezone now). Therefore, '[+-][hh][mm]' is '+0800'.</p>
+<p>[+-] can be either '+' or '-', indicating the difference of the local time from UTC. For example, I am now in China, and my local time is 8 hours ahead of UTC (If it's 01:00 in UTC at present, it should be 09:00 in my local timezone now). Therefore, '[+-][hh][mm]' is '+0800'.</p>
 <p>If the local timezone is exactly UTC, '[+-][hh][mm]' will simply be a letter 'Z'.</p>
 <p>The release (publish) time of the articles uses the format '[YYYY]-[MM]-[DD]T[hh]:[mm][+-][hh][mm]'. That's the basic format without the field of second. However, if you check the bottom of each web page, you will see a page generation time stamp, where the full basic format is used.</p>
 <h2 id="on-the-language">On the Language</h2>
-<p>English is not my native language. I use English because it's supported on almost all devices and the number of people who can read English is certainly larger than that of who can read Chinese, which is my first language. Therefore, people all over the world can read my articles without any help from online translators. Articles in my blog would mainly related to computer science, where English nouns are common, but I don't like adding too many English words in my Chinese articles. The mixture is disgusting to me. That's another reason I build this English blog. I would use simple English in my blog.</p>
+<p>English is not my native language. I use English because it's supported on almost all devices and the number of people who can read English is certainly larger than that of who can read Chinese, which is my first language. Therefore, people all over the world can read my articles without any help from online translators. Articles in my blog would mainly related to computer science, where English nouns are common, but I don't like adding too many English words in my Chinese articles. The mixture is disgusting to me. That's another reason I build this English blog.</p>
 <h2 id="on-the-tips">On the Tips</h2>
 <p>We don't talk about money here. So these are real "tips".</p>
 <p>When you scroll the page down, do you see the "Back To Top" tab appear on the righthand side of the top menu bar? Click it and it'll take you back to the top of the page, where the table of contents is.</p>
@@ -185,14 +189,14 @@ $$x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$ </p>
       <div class="row">
         <div class="span12">
           <div id="id_footer_pagebottom">
-            <p>&copy;Piyi Zu, web page generated at 2024-03-24T22:43:04+0800</p>
+            <p>&copy;Piyi Zu, web page generated at 2024-03-25T22:37:42+0800</p>
             <p>This work is licensed under 
               <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0</a>
               <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/cc.svg">
               <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/by.svg">
               <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nc.svg">
               <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nd.svg"></p>
-            <p>Follow the link to read the full list of <a href="/pages/about#acknowledgements">acknowledgements</a> and <a href="/pages/about#licences">licences</a></p>
+            <p>Follow the link to read the full list of <a href="/pages/About/index.html#acknowledgements">acknowledgements</a> and <a href="/pages/About/index.html#licences">licences</a></p>
           </div><!-- /#about -->
         </div><!-- /#contentinfo -->
       </div>

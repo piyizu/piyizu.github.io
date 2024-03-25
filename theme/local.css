@@ -107,6 +107,23 @@ div.entry-content p {
     text-align: justify;
 }
 
+div.article-content p, div.page-content p {
+    text-indent: 30px;
+}
+
+div.article-content p.text-indent-zero, div.page-content p.text-indent-zero {
+    text-indent: 0px;
+}
+
+div.article-content p.text-align-right, div.page-content p.no-indent {
+    text-align: right;
+}
+
+div.entry-content p.caption-of-img-or-table {
+    text-align: center;
+    text-indent: 0;
+}
+
 div.entry-content img {
     height: auto;
     margin-left: auto;
@@ -115,19 +132,26 @@ div.entry-content img {
     max-width: 500px;
 }
 
+div.pagination a {
+    line-height: 32px;
+    width: 35px;
+    text-align: center;
+}
+
+div.pagination li.active a {
+    width: 50px;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+div.pagination li.disabled a {
+    text-decoration: line-through;
+}
+
 div.entry-content img.width-100px { width: 100px; }
 div.entry-content img.width-200px { width: 200px; }
 div.entry-content img.width-300px { width: 300px; }
 div.entry-content img.width-400px { width: 400px; }
-
-div.entry-content p.caption-of-img-or-table {
-    text-align: center;
-    text-indent: 0;
-}
-
-div.article-content p, div.page-content p {
-    text-indent: 30px;
-}
 
 html { font-family: Arial, Helvetica, sans-serif; }
 body { font-family: Arial, Helvetica, sans-serif; }
@@ -137,4 +161,4 @@ p.meta { font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
 tbody { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 19px;}
 #id_footer_pagebottom p { font-family: Arial, Helvetica, sans-serif; font-size: 17px; }
 div.entry-content p.caption-of-img-or-table { font-family: Arial, Helvetica, sans-serif; font-size: 18px;}
-.katex-display { font-size: 18px; }
+.katex-display, .katex { font-size: 17px !important; }

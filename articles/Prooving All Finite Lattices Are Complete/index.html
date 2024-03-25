@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <link rel="shortcut icon" href="/favicon.ico" >
+    <title>Prooving All Finite Lattices Are Complete - Piyi's Blog</title>
+    <meta charset="utf-8" />
+    <!--link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" /-->
+    <link rel="stylesheet" type="text/css" href="/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/pastie.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/local.css" />
+    <link href="/" type="application/atom+xml" rel="alternate" title="Piyi's Blog Atom Feed" />
+    <script type="text/javascript" src="/theme/local.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <ul class="nav nav-tabs">
+        <li  > <a class="brand" href="/">Piyi's Blog</a> </li>
+
+              <li><a href="/pages/About/index.html">About</a></li>
+
+        <li class="topmenubar-rightmost" id="li_back_to_top"> <a href="#">Back To Top</a> </li>
+
+    </ul>
+
+    <div class="container">
+      <div class="row">
+        
+        <div class="span3">
+          <div class="used-to-be-well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Navigate the Blog</li>
+              <li ><a href="/">Home</a></li>
+              <li ><a href="/tags.html">Tags</a></li>
+              <li ><a href="/archives.html">Archives</a></li>
+              <li ><a href="/categories.html">Categories</a></li>
+
+
+
+              <li class="nav-header">Social</li>
+              <li class="social"><a href="mailto://1729403632@qq.com/" target="_blank">Email me</a></li>
+              <li class="social"><a href="https://github.com/piyizu" target="_blank">Fork me</a></li>
+
+              <li class="nav-header">Recommended</li>
+              <li><a href="https://www.xmu.edu.cn/" target="_blank">XMU</a></li>
+
+              <li class="nav-header">Blogroll</li>
+              <li><a href="https://shaoyihao.site/" target="_blank">Yihao's Blog</a></li>
+
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+
+        <div class="span9">
+<div id="content">
+    <div class="header">
+        <h1>Prooving All Finite Lattices Are Complete</h1>
+    </div>
+
+    <link rel="stylesheet" href="/static_js/katex/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer type="text/javascript" src="/static_js/katex/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer type="text/javascript" src="/static_js/katex/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    <script defer type="text/javascript" src="/static_js/katex/katex_config.js"></script>
+
+    <p class="meta"><small>
+<span>Author: <a href="/author/piyi-zu.html">Piyi Zu</a></span><br />        <span>Release Time: 2024-03-25T21:00+0800</span><br />
+<span class="tags">Tag(s): <a href="/tag/proof.html">proof</a></span><br /><span class="categories">Category: <a href="/category/maths.html">Maths</a></span><br />    </small></p>
+
+    	<nav class="toc"><h2>Table of Contents</h2>
+    	<div class="toc">
+<ul>
+<li><a href="#some-backgrounds">Some Backgrounds</a></li>
+<li><a href="#lemma-1-order-preservation">Lemma 1: Order Preservation</a></li>
+<li><a href="#lemma-2-associativity">Lemma 2: Associativity</a></li>
+<li><a href="#lemma-3-finite-completeness">Lemma 3: Finite Completeness</a></li>
+<li><a href="#theorem-completeness-of-finite-lattices">Theorem: Completeness of Finite Lattices</a></li>
+</ul>
+</div>
+		</nav>
+		<hr/>
+
+        <div class="entry-content article-content">
+        
+<h2 id="some-backgrounds">Some Backgrounds</h2>
+<p>Lattice is an abstract algebraic structure commonly used in static program analysis to explain the termination of recursions or loops. A lattice is a partial-order set where given two elements in the set, we can always find their greatest lower bound and their least upper bound in the set. A partial-order set, however, is a set with a binary operator $\le$ with the following three properties (we use $A$ to refer to the set):</p>
+<p>(1) Self-reflexivity: $\forall a. a\in A\rightarrow a\le a$</p>
+<p>(2) Anti-symmetry: if $a\le b$ and $b\le a$, then $a=b$</p>
+<p>(3) Transitivity: if $a\le b$ and $b \le c$, then $a\le c$</p>
+<p>In the theory of software analysis, we almost always deal with complete lattices, where every finite non-empty set of elements has its least upper bound and its greatest lower bound. However, almost all materials I saw omit the proof of that every finite lattice is a complete lattice. In this article, I'll show you how to prove it by first proving the associativity of two basic operations: to get the least upper bound of two elements and to get the greatest lower bound of two elements.</p>
+<p>In the proof, we use $(L, \le)$ to define a lattice on a partial-order set $L$. We define $a\vee b$ to be the least upper bound of two elements in the lattic: $a$ and $b$. We define $a\wedge b$ to be their greatest lower bound.</p>
+<h2 id="lemma-1-order-preservation">Lemma 1: Order Preservation</h2>
+<p><strong>If $a,b,c,d\in (L, \le)$, and $a\le c, b\le d$, then we have $a\vee b\le c\vee d$, also $a\wedge b\le c\wedge d$</strong></p>
+<p class="text-indent-zero"> Proof:</p>
+<p>Let's start by proving the conclusion of least upper bound.</p>
+<p>From the definition of least upper bound, we know that $c\le c\vee d$. As $a\le c$, we know that $a\le c\vee d$. In the same way, we can also know that $b\le c\vee d$. Therefore, $c\vee d$ is an upper bound of $a$ and $b$. The least upper bound of $a$ and $b$ must be a lower bound of $c\vee d$, i.e. $$a\vee b\le c\vee d$$</p>
+<p>Similarly, we can prove: $$a\wedge b\le c\wedge d$$</p>
+<p class="text-align-right">$\blacksquare$</p>
+<h2 id="lemma-2-associativity">Lemma 2: Associativity</h2>
+<p><strong>If $\alpha,\beta,\gamma\in(L,\le)$, then $(\alpha\wedge\beta)\wedge\gamma=\alpha\wedge(\beta\wedge\gamma)$, also $(\alpha\vee\beta)\vee\gamma=\alpha\vee(\beta\vee\gamma)$</strong></p>
+<p class="text-indent-zero"> Proof:</p>
+<p>Let's start with the greatest lower bound part.</p>
+<p>According to the definition of greatest lower bound, we can get that $\alpha\wedge\beta\le\beta$. Lattices have the property of self-reflexivity. Thus, we know that $\gamma\le\gamma$. By lemma 1, we know that $$(\alpha\wedge\beta)\wedge\gamma\le\beta\wedge\gamma$$</p>
+<p>On the other hand, we know that $$(\alpha\wedge\beta)\wedge\gamma\le\alpha\wedge\beta\le\alpha$$</p>
+<p>From the two results above, we can know that $(\alpha\wedge\beta)\wedge\gamma$ is a lower bound of $\alpha$ and $(\beta\wedge\gamma)$ and thus must be a lower bound of the greatest lower bound of both, i.e. $$(\alpha\wedge\beta)\wedge\gamma\le\alpha\wedge(\beta\wedge\gamma)$$</p>
+<p>Similarly, we can prove $$\alpha\wedge(\beta\wedge\gamma)\le(\alpha\wedge\beta)\wedge\gamma$$</p>
+<p>Lattices have the property of anti-symmetry. Therefore, we conclude that $$\alpha\wedge(\beta\wedge\gamma)=(\alpha\wedge\beta)\wedge\gamma$$</p>
+<p>In the same way can we prove that $(\alpha\vee\beta)\vee\gamma=\alpha\vee(\beta\vee\gamma)$. The lemma is now proved.</p>
+<p class="text-align-right">$\blacksquare$</p>
+<h2 id="lemma-3-finite-completeness">Lemma 3: Finite Completeness</h2>
+<p><strong>Every finite non-empty subset of $L$ has its greatest lower bound and its least upper bound in $L$</strong>.</p>
+<p class="text-indent-zero"> Proof:</p>
+<p>We do the least upper bound first.</p>
+<p>Assume that $S={a_1, a_2, ..., a_{|s|}}$, then for any element $a_i$, $a_i\le a_i\vee(\vee_{a\in S-{a_i}}\ a) = (\vee_{a\in S}\ a)$ must hold. It means that $(\vee_{a\in S}\ a)$ is an upper bound of $S$. It's obvious that $(\vee_{a\in S}\ a)$ is an element in $L$. This can be explained by the associativity of the get-least-upper-bound operation and the definition of lattice.</p>
+<p>Suppose there exists another upper bound of $S$, named $x$, then it holds that $$\forall a. a\in S\rightarrow a\le x$$</p>
+<p>By repeatedly applying lemma 1 and lemma 2 on $S$, we can get:
+$$ a_1\vee a_2\vee ... \vee a_{|S|} = \vee_{a\in S}\ a \le x\vee x\vee ...\vee x = x$$</p>
+<p>You can see that every upper bound of $S$ other than $(\vee_{a\in S}\ a)$ cann't be lower than $(\vee_{a\in S}\ a)$, i.e. $(\vee_{a\in S}\ a)$ is the least upper bound of $S$.</p>
+<p>Similarly, we can prove that $(\wedge_{a\in S}\ a)$ is the greatest lower bound of $S$.</p>
+<p class="text-align-right">$\blacksquare$</p>
+<h2 id="theorem-completeness-of-finite-lattices">Theorem: Completeness of Finite Lattices</h2>
+<p><strong>Every non-empty finite lattice is a complete lattice</strong></p>
+<p class="text-indent-zero"> Proof:</p>
+<p>In lemma 3, make $S$ be $L$.</p>
+<p class="text-align-right">$\blacksquare$</p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="id_footer_pagebottom">
+            <p>&copy;Piyi Zu, web page generated at 2024-03-25T22:37:42+0800</p>
+            <p>This work is licensed under 
+              <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0</a>
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/cc.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/by.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nc.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nd.svg"></p>
+            <p>Follow the link to read the full list of <a href="/pages/About/index.html#acknowledgements">acknowledgements</a> and <a href="/pages/About/index.html#licences">licences</a></p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>
