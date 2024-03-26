@@ -84,6 +84,7 @@ th {
 
 td {
     border-bottom: 1px solid #0e71af;
+    text-align: left;
 }
 
 tr:hover > td {
@@ -98,6 +99,13 @@ a.brand {
     font-size: 120%;
     font-weight: bold;
 }
+
+.used-to-be-well a[target="_blank"]:before {content: url('./icons/earth.png'); margin-right: 2px; vertical-align: -3px;}
+
+.used-to-be-well a[href*='index.html']:before {content: url('./icons/home.png'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[href*='archives.html']:before {content: url('./icons/archives.png'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[href*='tags.html']:before {content: url('./icons/tags.png'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[href*='categories.html']:before {content: url('./icons/categories.png'); margin-right: 2px; vertical-align: -3px;}
 
 .social a[href*='github.com']:before {content: url('./icons/github.png'); margin-right: 2px; vertical-align: -3px;}
 .social a[href*='mailto']:before {content: url('./icons/mailto.png'); margin-right: 2px; vertical-align: -3px;}
@@ -161,4 +169,4 @@ p.meta { font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
 tbody { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 19px;}
 #id_footer_pagebottom p { font-family: Arial, Helvetica, sans-serif; font-size: 17px; }
 div.entry-content p.caption-of-img-or-table { font-family: Arial, Helvetica, sans-serif; font-size: 18px;}
-.katex-display, .katex { font-size: 17px !important; }
+.katex-display, .katex { font-size: 18px !important; }
