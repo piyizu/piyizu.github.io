@@ -21,7 +21,7 @@ div.used-to-be-well {
 .nav-list > .active > a, 
 .nav-list > .active > a:hover {
     color:white;
-    background-color: #0088cc;
+    background-color: #0088ccc0;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
     border:1px;
     border-color: #0088cc;
@@ -43,8 +43,9 @@ div.used-to-be-well {
     top: 0px;
     width: 100%;
     min-width: max-content;
-    background-color: #0e71af;
-    z-index: 3;
+    background-color: #0e71bfd0;
+    z-index: 2;
+    backdrop-filter: blur(3px);
 }
 
 .nav-tabs > li > a {
@@ -100,16 +101,16 @@ a.brand {
     font-weight: bold;
 }
 
-.used-to-be-well a[target="_blank"]:before {content: url('./icons/earth.png'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[target="_blank"]:before {content: url('./icons/ie.svg'); margin-right: 2px; vertical-align: -3px;}
 
-.used-to-be-well a[href*='index.html']:before {content: url('./icons/home.png'); margin-right: 2px; vertical-align: -3px;}
-.used-to-be-well a[href*='archives.html']:before {content: url('./icons/archives.png'); margin-right: 2px; vertical-align: -3px;}
-.used-to-be-well a[href*='tags.html']:before {content: url('./icons/tags.png'); margin-right: 2px; vertical-align: -3px;}
-.used-to-be-well a[href*='categories.html']:before {content: url('./icons/categories.png'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[href*='index.html']:before {content: url('./icons/home.svg'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[href*='archives.html']:before {content: url('./icons/archives.svg'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[href*='tags.html']:before {content: url('./icons/tags.svg'); margin-right: 2px; vertical-align: -3px;}
+.used-to-be-well a[href*='categories.html']:before {content: url('./icons/categories.svg'); margin-right: 2px; vertical-align: -3px;}
 
-.social a[href*='github.com']:before {content: url('./icons/github.png'); margin-right: 2px; vertical-align: -3px;}
-.social a[href*='mailto']:before {content: url('./icons/mailto.png'); margin-right: 2px; vertical-align: -3px;}
-.social a[href*='rss.xml']:before {content: url('./icons/rss.png'); margin-right: 2px; vertical-align: -3px;}
+.social a[href*='github.com']:before {content: url('./icons/github.svg'); margin-right: 2px; vertical-align: -3px;}
+.social a[href*='mailto']:before {content: url('./icons/mailto.svg'); margin-right: 2px; vertical-align: -3px;}
+.social a[href*='rss.xml']:before {content: url('./icons/rss.svg'); margin-right: 2px; vertical-align: -3px;}
 
 div.entry-content p {
     text-align: justify;
