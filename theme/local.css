@@ -43,7 +43,7 @@ div.used-to-be-well {
     top: 0px;
     width: 100%;
     min-width: max-content;
-    background-color: #0e71bfd0;
+    background-color: #0e71bfd3;
     z-index: 2;
     backdrop-filter: blur(3px);
 }
