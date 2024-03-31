@@ -171,4 +171,5 @@ tbody { font-family: Georgia, 'Times New Roman', Times, serif; font-size: 19px;}
 #id_footer_pagebottom p { font-family: Arial, Helvetica, sans-serif; font-size: 17px; }
 div.entry-content p.caption-of-img-or-table { font-family: Arial, Helvetica, sans-serif; font-size: 18px;}
 div.entry-content ul li { font-family: Georgia, 'Times New Roman', Times, serif;}
+div.entry-content ol li { font-family: Georgia, 'Times New Roman', Times, serif;}
 .katex-display, .katex { font-size: 18px !important; }

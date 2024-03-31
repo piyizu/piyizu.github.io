@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <link rel="shortcut icon" href="/favicon.ico" >
+    <title>Devastating 'rm' Command - Piyi's Blog</title>
+    <meta charset="utf-8" />
+    <!--link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" /-->
+    <link rel="stylesheet" type="text/css" href="/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/pastie.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/local.css" />
+    <link href="/" type="application/atom+xml" rel="alternate" title="Piyi's Blog Atom Feed" />
+    <script type="text/javascript" src="/theme/local.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <ul class="nav nav-tabs">
+        <li  > <a class="brand" href="/">Piyi's Blog</a> </li>
+
+              <li><a href="/pages/About/index.html">About</a></li>
+              <li><a href="/pages/Reading/index.html">Reading</a></li>
+
+        <li class="topmenubar-rightmost" id="li_back_to_top"> <a href="#">Back To Top</a> </li>
+
+    </ul>
+
+    <div class="container">
+      <div class="row">
+        
+        <div class="span3">
+          <div class="used-to-be-well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Navigate the Blog</li>
+              <li ><a href="/index.html">Home</a></li>
+              <li ><a href="/tags.html">Tags</a></li>
+              <li ><a href="/archives.html">Archives</a></li>
+              <li ><a href="/categories.html">Categories</a></li>
+
+
+
+              <li class="nav-header">Social</li>
+              <li class="social"><a href="mailto://1729403632@qq.com" target="_blank">Email me</a></li>
+              <li class="social"><a href="https://github.com/piyizu" target="_blank">Fork me</a></li>
+
+              <li class="nav-header">Recommended</li>
+              <li><a href="https://www.xmu.edu.cn" target="_blank">XMU</a></li>
+
+              <li class="nav-header">Blogroll</li>
+              <li><a href="https://shaoyihao.github.io" target="_blank">Yihao's Blog</a></li>
+
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+
+        <div class="span9">
+<div id="content">
+
+
+    <div class="header">
+        <h1>Devastating 'rm' Command</h1>
+    </div>
+
+    <p class="meta"><small>
+<span>Author: <a href="/author/piyi-zu.html">Piyi Zu</a></span><br />        <span>Release Time: 2024-03-31T17:56+0800</span><br />
+<span class="tags">Tag(s): <a href="/tag/opinion.html">opinion</a></span><br /><span class="categories">Category: <a href="/category/miscellaneous.html">Miscellaneous</a></span><br />    </small></p>
+
+    	<nav class="toc"><h2>Table of Contents</h2>
+    	<div class="toc">
+<ul>
+<li><a href="#rm-a-very-dangerous-command">'rm' --- A Very Dangerous Command</a></li>
+<li><a href="#some-bad-experiences-of-my-improperly-using-rm">Some Bad Experiences of My Improperly Using 'rm'</a></li>
+<li><a href="#lessons-taught-and-learnt">Lessons Taught and Learnt</a></li>
+</ul>
+</div>
+		</nav>
+		<hr/>
+
+        <div class="entry-content article-content">
+        
+<h2 id="rm-a-very-dangerous-command">'rm' --- A Very Dangerous Command</h2>
+<p>It looks cool that you operate your computer in command-line mode in front of folks who know little about computers. It does unless you type a  wrong 'rm' command and press Enter key without even noticing your command would destroy the computer. The program runs so fast that when you realise your computer commits a suicide, it's all too late...</p>
+<p>The command-line is a very old way to operate computers. Before graphical user interfaces(GUIs) were invented, it was the most convenient way of all. It has advantages: simple, clean and fast. It can be seen now on most servers because it comsumes few resources and seldom crashes the operating system. Some programmers like to do their work in command-line environments because it contains nothing that may distract or upset them, while in GUI environments they usually have annoyingly piled windows and a messy taskbar. However, one should be very careful when typing commands into their computer, as there exists a very dangerous but common command --- 'rm'.</p>
+<p>You may have heard of a joke that if one wants their Linux computer to run even faster, they can simply execute 'sudo rm / -rf' in the terminal, then sit back and relax. This command is most harmful. It removes all the files in the computer without a pause. People who know even a little about computers wouldn't type commands like that into the computer, but sometimes due to carelessness, they do make mistakes.</p>
+<h2 id="some-bad-experiences-of-my-improperly-using-rm">Some Bad Experiences of My Improperly Using 'rm'</h2>
+<p>I've unfortunately made such mistakes twice in my life and I promised to myself they NEVER happen again.</p>
+<p>The first time I screwed things up was a year ago when I was preparing to develop a new application on a small computer like a Raspberry Pi. The system on the computer was oversimplifed and I had to log in as a super user. The development needed a lot of files but the computer then had no Internet access, so I had got to copy files manually and switch among different directories. When copying files, it's common to be in a directory where you can get the source and the destination without accessing the parent directory. Thus I changed my working directory to be the root.</p>
+<p>After a wrong copy, I decided to remove some files and repeat the copy with correct arguments. But I forgot I was in the root directory and I executed 'rm ./* -rf'. I didn't notice that I'd done something wrong until I found many files that couldn't be in the copied files were also deleted. I sent a quick Ctrl+C to terminate the execution, but the last printed message told me that almost all the files of the computer had been smashed into ash. I tried to run 'ls' but the computer didn't know what 'ls' was. I restarted the computer and it ran, as you may guess, into a black screen. I spent seveal weeks repairing it as there was hardly anything about the product online.</p>
+<p>Another time when I was cleaning my project source directory, I executed 'rm ./* -r' in some folder. But for some unknown reason, the dot was missing. The command became 'rm /* -r'. I nearly jumped from my seat when I was asked if it should go into the write-protected '/boot' directory to delete more files. No man steps into the same river twice. However, I made things wrong again when executing 'rm' command. Nevertheless, I was lucky this time, for I executed the command as a common user and no file seemed to be removed.</p>
+<h2 id="lessons-taught-and-learnt">Lessons Taught and Learnt</h2>
+<ol>
+<li><strong>Never</strong> log in as a super user</li>
+<li><strong>Never</strong> execute 'rm' command in the root directory unless necessary</li>
+<li><strong>Never</strong> use '-f' options when removing files with 'rm'</li>
+<li><strong>Always</strong> check the command arguments and the current working directory before pressing Enter</li>
+<li>Recommended to add '-i' or '-I' option when using 'rm'</li>
+</ol>
+<p>Also, when writing a program to delete a large number of files, be careful and don't forget to replace the removal commands with print()'s when testing and absolute pathnames are better and safer than relative ones.</p>
+<p>It's always right to be careful and focused when working on the computers.</p>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="id_footer_pagebottom">
+            <p>&copy;Piyi Zu, web pages generated at 2024-03-31T18:11:19+0800</p>
+            <p>This work is licensed under 
+              <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0</a>
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/cc.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/by.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nc.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nd.svg"></p>
+            <p>Follow the links to read the full list of <a href="/pages/About/index.html#acknowledgements">acknowledgements</a> and <a href="/pages/About/index.html#licences">licences</a></p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>
