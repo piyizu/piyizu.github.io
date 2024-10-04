@@ -1,0 +1,960 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <link rel="shortcut icon" href="/favicon.ico" >
+    <title>Notes on Operating Systems - Piyi's Blog</title>
+    <meta charset="utf-8" />
+    <!--link href="http://fonts.googleapis.com/css?family=Arimo:400,700|Inika" rel="stylesheet" type="text/css" /-->
+    <link rel="stylesheet" type="text/css" href="/theme/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/pastie.css" />
+    <link rel="stylesheet" type="text/css" href="/theme/local.css" />
+    <link href="/" type="application/atom+xml" rel="alternate" title="Piyi's Blog Atom Feed" />
+    <script type="text/javascript" src="/theme/local.js"></script>
+
+
+  </head>
+
+  <body>
+
+    <ul class="nav nav-tabs">
+        <li  > <a class="brand" href="/">Piyi's Blog</a> </li>
+
+              <li><a href="/pages/About/index.html">About</a></li>
+              <li><a href="/pages/News!/index.html">News!</a></li>
+              <li><a href="/pages/Reading/index.html">Reading</a></li>
+
+        <li class="topmenubar-rightmost" id="li_back_to_top"> <a href="#">Back To Top</a> </li>
+
+    </ul>
+
+    <div class="container">
+      <div class="row">
+        
+        <div class="span3">
+          <div class="used-to-be-well">
+            <ul class="nav nav-list">
+              <li class="nav-header">Navigate the Blog</li>
+              <li ><a href="/index.html">Home</a></li>
+              <li ><a href="/tags.html">Tags</a></li>
+              <li ><a href="/archives.html">Archives</a></li>
+              <li ><a href="/categories.html">Categories</a></li>
+
+
+
+              <li class="nav-header">Social</li>
+              <li class="social"><a href="mailto:1729403632@qq.com" target="_blank">Email me</a></li>
+              <li class="social"><a href="https://github.com/piyizu" target="_blank">Fork me</a></li>
+
+              <li class="nav-header">Recommended</li>
+              <li><a href="https://www.nudt.edu.cn" target="_blank">NUDT</a></li>
+              <li><a href="https://www.xmu.edu.cn" target="_blank">XMU</a></li>
+
+              <li class="nav-header">Blogroll</li>
+              <li><a href="https://shaoyihao.site" target="_blank">Yihao's Blog</a></li>
+              <li><a href="https://lumen3ever.top" target="_blank">YHY's Blog</a></li>
+
+            </ul>
+          </div><!-- /#menu -->
+        </div>
+
+        <div class="span9">
+<div id="content">
+
+    <link rel="stylesheet" href="/static_js/katex/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+    <!-- The loading of KaTeX is deferred to speed up page rendering -->
+    <script defer type="text/javascript" src="/static_js/katex/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+    <!-- To automatically render math in text elements, include the auto-render extension: -->
+    <script defer type="text/javascript" src="/static_js/katex/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+            onload="renderMathInElement(document.body);"></script>
+    <script defer type="text/javascript" src="/static_js/katex/katex_config.js"></script>
+
+    <div class="header">
+        <h1>Notes on Operating Systems</h1>
+    </div>
+
+    <p class="meta"><small>
+<span>Author: <a href="/author/piyi-zu.html">Piyi Zu</a></span><br />        <span>Release Time: 2024-08-19T00:26+0800</span><br />
+<span class="tags">Tag(s): <a href="/tag/knowledge.html">knowledge</a></span><br /><span class="categories">Category: <a href="/category/computer.html">Computer</a></span><br />    </small></p>
+
+    	<nav class="toc"><h2>Table of Contents</h2>
+    	<div class="toc">
+<ul>
+<li><a href="#concurrency-and-synchronisation">Concurrency and Synchronisation</a><ul>
+<li><a href="#readerwriter-problem">Reader/Writer Problem</a></li>
+</ul>
+</li>
+<li><a href="#multiprogrammed-uniprocessor">Multiprogrammed Uniprocessor</a><ul>
+<li><a href="#types-of-scheduling">Types of Scheduling</a></li>
+<li><a href="#scheduling-criteria">Scheduling Criteria</a></li>
+<li><a href="#various-scheduling-policies">Various Scheduling Policies</a></li>
+</ul>
+</li>
+<li><a href="#multiprocessor-and-multicore-scheduling">Multiprocessor and Multicore Scheduling</a><ul>
+<li><a href="#synchronisation-granularity">Synchronisation Granularity</a></li>
+<li><a href="#design-issues">Design Issues</a></li>
+<li><a href="#process-scheduling">Process Scheduling</a></li>
+<li><a href="#thread-scheduling">Thread Scheduling</a></li>
+<li><a href="#multicore-thread-scheduling">Multicore Thread Scheduling</a></li>
+</ul>
+</li>
+<li><a href="#real-time-scheduling">Real-Time Scheduling</a><ul>
+<li><a href="#deadline-scheduling">Deadline Scheduling</a></li>
+<li><a href="#rate-monotonic-scheduling">Rate Monotonic Scheduling</a></li>
+<li><a href="#priority-inversion">Priority Inversion</a></li>
+</ul>
+</li>
+<li><a href="#io-manangement-and-disk-scheduling-p506">I/O Manangement and Disk Scheduling p506</a><ul>
+<li><a href="#dma-p509">DMA p509</a></li>
+<li><a href="#logical-structures-of-the-io-function-p512">Logical Structures of the I/O Function p512</a></li>
+<li><a href="#io-buffering-p514">I/O Buffering p514</a></li>
+<li><a href="#disk-scheduling-p517">Disk Scheduling p517</a></li>
+<li><a href="#raid-p524">RAID p524</a></li>
+<li><a href="#disk-cache">Disk Cache</a></li>
+</ul>
+</li>
+<li><a href="#file-management">File Management</a><ul>
+<li><a href="#logical-file-structures">Logical File Structures</a></li>
+<li><a href="#file-system-software-structure">File System Software Structure</a></li>
+<li><a href="#file-organisation">File Organisation</a></li>
+<li><a href="#b-trees">B-Trees</a></li>
+<li><a href="#file-directories-file-sharing">File Directories &amp; File Sharing</a></li>
+<li><a href="#record-blocking-secondary-storage-management">Record Blocking &amp; Secondary Storage Management</a></li>
+</ul>
+</li>
+</ul>
+</div>
+		</nav>
+		<hr/>
+
+        <div class="entry-content article-content">
+        
+<p><em>This article continues to be updated...</em></p>
+<h2 id="concurrency-and-synchronisation">Concurrency and Synchronisation</h2>
+<h3 id="readerwriter-problem">Reader/Writer Problem</h3>
+<ul>
+<li>Description</li>
+<li>Solution</li>
+</ul>
+<h2 id="multiprogrammed-uniprocessor">Multiprogrammed Uniprocessor</h2>
+<h3 id="types-of-scheduling">Types of Scheduling</h3>
+<ul>
+<li>Long-term: New-&gt;Ready</li>
+<li>Midium-term: Ready/Suspend&lt;--&gt;Ready, Blocked/Suspend&lt;--&gt;Blocked </li>
+<li>Short-term: Ready&lt;--&gt;Running--&gt;Blocked--&gt;Ready</li>
+</ul>
+<h3 id="scheduling-criteria">Scheduling Criteria</h3>
+<ul>
+<li>User Oriented, Performance Related<ul>
+<li>Turnaround time: submission -&gt; completion</li>
+<li>Response time: submission -&gt; response</li>
+<li>Deadlines</li>
+</ul>
+</li>
+<li>User Oriented, Other<ul>
+<li>Predictability</li>
+</ul>
+</li>
+<li>System Oriented, Performance Related<ul>
+<li>Throughput: Num_processes / Time_interval</li>
+<li>Processor utilisation</li>
+</ul>
+</li>
+<li>System Oriented, Other<ul>
+<li>Fairness</li>
+<li>Enforcing priority</li>
+<li>Balancing resources</li>
+</ul>
+</li>
+</ul>
+<h3 id="various-scheduling-policies">Various Scheduling Policies</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Preemptive</th>
+<th>Starvation</th>
+<th>Fairness</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FCFS</td>
+<td>non-preemptive</td>
+<td>no starvation</td>
+<td>unfair to short and IO-bounded processes</td>
+</tr>
+<tr>
+<td>Round Robin (Time slicing)</td>
+<td>Preemptive at time quantum</td>
+<td>no starvation</td>
+<td>fair</td>
+</tr>
+<tr>
+<td>Shortest Process Next</td>
+<td>non-preemptive</td>
+<td>possible starvation</td>
+<td>unfair to long processes</td>
+</tr>
+<tr>
+<td>Shortest Remaining Time</td>
+<td>Preemptive at arrival</td>
+<td>possible starvation</td>
+<td>unfair to long processes</td>
+</tr>
+<tr>
+<td>Highest Response Rate Next</td>
+<td>non-preemptive</td>
+<td>no starvation</td>
+<td>good balance</td>
+</tr>
+<tr>
+<td>Feedback</td>
+<td>preemptive at time quantum</td>
+<td>possible starvation</td>
+<td>may favour IO-bound processes</td>
+</tr>
+</tbody>
+</table>
+<p>Response ratio: $$R = \frac{w + s}{s}$$
+$w$: time spent waiting for the processor<br/>
+$s$: <strong>expected</strong> service time<br/>
+If a process with value $R_0$ is dispatched immediately, its normalised turnaround time is $R_0$. $R_0$ is never less than 1.  </p>
+<h2 id="multiprocessor-and-multicore-scheduling">Multiprocessor and Multicore Scheduling</h2>
+<h3 id="synchronisation-granularity">Synchronisation Granularity</h3>
+<ul>
+<li>Fine (instruction level)</li>
+<li>Medium(single application)</li>
+<li>Coarse(concurrent processes)</li>
+<li>Very Coarse(distributed processing across network nodes) </li>
+<li>Independent</li>
+</ul>
+<h3 id="design-issues">Design Issues</h3>
+<ul>
+<li>Assignment of processes to processors: static, dynamic, combined</li>
+<li>Use of Multiprogramming on Individual Processors: improves efficiency</li>
+<li>Process Dispatching: the use of priorities or of sophisticated scheduling algorithms based on past usage may imporove performance over simple FCFS.</li>
+</ul>
+<h3 id="process-scheduling">Process Scheduling</h3>
+<ul>
+<li>Conclusion: The specific scheduling policy is less important with two processors than with one. This becomes even stronger as the number of processors increase.</li>
+</ul>
+<h3 id="thread-scheduling">Thread Scheduling</h3>
+<ul>
+<li>Load sharing<ul>
+<li>Description: Processes are not assigned to a particular processor.</li>
+<li>Features: no centralised scheduler; the load is distributed evenly across the processors</li>
+<li>Policy<ul>
+<li>first-come-first-served; (<strong>Best performance</strong>)</li>
+<li>smallest number of threads first;</li>
+<li>preemptive (at arrival) smallest number of threads first</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Gang Scheduling<ul>
+<li>Description: Schedule a set of processes simultaneously on a set of processors</li>
+<li>Features: process switches are minimised, time saved in resource allocation, time slicing</li>
+<li>Forms<ul>
+<li>uniform scheduling: time quanta are equal</li>
+<li>weighted scheduling: time quanta are set according to the number of threads</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dedicated Processor Assignment<ul>
+<li>Description: Dedicate a group of processors to an application for the duration of the application, an extreme form of gang scheduling</li>
+<li>Issues: the number of active threads should be limited to the number of processors</li>
+</ul>
+</li>
+<li>Dynamic Scheduling<ul>
+<li>Description: The number of threads in a process can be altered during the course of execution.</li>
+<li>Implementation: The oprating system is responsible for partitioning the processors among the jobs. Each job uses the processors concurrently in its partition to execute some subset of its runnable tasks by mapping these tasks to threads.</li>
+<li>Issues: the overhead of dynamic scheduling may negate its performance advantage.</li>
+</ul>
+</li>
+</ul>
+<h3 id="multicore-thread-scheduling">Multicore Thread Scheduling</h3>
+<ul>
+<li>Issues: As the number of cores per chip increases, a need to minimise access to off-chip memory takes precedence over a desire to maximise processor utilisation. Cache architectures sometimes affect the performance of two threads that share memory resources.</li>
+</ul>
+<h2 id="real-time-scheduling">Real-Time Scheduling</h2>
+<ul>
+<li>Real-time Tasks<ul>
+<li>hard real-time tasks</li>
+<li>soft real-time tasks</li>
+</ul>
+</li>
+<li>Requirements of real-time operating systems:<ul>
+<li>Determinism</li>
+<li>Responsiveness<ul>
+<li>Time required to initialise and perform the interrupt service routine(ISR)</li>
+<li>The effect of interrupt nesting</li>
+</ul>
+</li>
+<li>User control: allow fine-grained control over task priority</li>
+<li>Reliability</li>
+<li>Fail-soft operation: the ability of a system to fail in such a way as to preserve as much capability and data as possible.</li>
+</ul>
+</li>
+<li>Approaches of Real-Time Scheduling<ul>
+<li>Static table-driven approaches<ul>
+<li>applicable to periodic tasks</li>
+<li>predicatable but inflexible</li>
+<li>Examples: Earliest-deadline-first, ...</li>
+</ul>
+</li>
+<li>Static priority-driven preemptive approaches<ul>
+<li>makes use of the priority-driven preeemptive scheduling mechanism</li>
+<li>Examples: RMS(Rate Monotonic Scheduling), ...</li>
+</ul>
+</li>
+<li>Dynamic planning-based approaches</li>
+<li>Dynamic best effort approaches<ul>
+<li>used by many systems, tasks are aperiodic</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="deadline-scheduling">Deadline Scheduling</h3>
+<ul>
+<li>For a given preemptive strategy and using <strong>either starting or completion deadlines</strong>, a policy of scheduling the task with <strong>the earliest deadline</strong> minimises the fraction of tasks that miss their deadlines.</li>
+<li>preemptive at arrival, tasks with earliest deadlines have higher priority</li>
+</ul>
+<h3 id="rate-monotonic-scheduling">Rate Monotonic Scheduling</h3>
+<ul>
+<li>For <strong>RMS</strong>, the task with <strong>the shortest periods</strong> is serviced first (<strong>preemptive at arrival</strong>)</li>
+<li>For <strong>a periodic scheduling algorithm</strong> to be possible to meet all deadlines, the following inequality must hold, where $C$ is the execution time and $T$ is the period:
+$$ \sum_{k=1}^n{\frac{C_k}{T_k}} \le 1$$</li>
+<li>For <strong>RMS</strong> to be possible to meet all deadlines, the following inequality must hold:
+$$ \sum_{k=1}^n{\frac{C_k}{T_k}} \le n\cdot(2^{\frac{1}{n}}-1)$$</li>
+</ul>
+<h3 id="priority-inversion">Priority Inversion</h3>
+<ul>
+<li>Occurence: when a higher-priority task waits for a lower-priority one</li>
+<li>Unbounded priority inversion: the duration of a priority inversion depends not only on the time required to handle a shared resource but also on the unpredicatable actions of other unrelated tasks.</li>
+<li>To avoid unbounded priority inversion<ul>
+<li><strong>priority inheritance</strong>: a lower-priority task inherits the priority of any higher-priority task pending on a resource they share. If a higher-priority task is blocked because some resource it needs is locked by a lower-priority task, the lower-priority task is assigned the same priority with the higher-priority one.</li>
+<li><strong>priority ceiling</strong>: A priority is associated with each resource. The priority assigned to a resource is one level higher than the priority of its highest-priority user. The scheduler dynamically assigns the priority to the user.</li>
+</ul>
+</li>
+</ul>
+<h2 id="io-manangement-and-disk-scheduling-p506">I/O Manangement and Disk Scheduling p506</h2>
+<ul>
+<li>Three categories of I/O devices<ul>
+<li>Human readable: printers, terminals, keyborads, mice...</li>
+<li>Machine readable: disk drives, USB keys, sensors, controllers, actuators...</li>
+<li>Communication: digital line drivers, modems...</li>
+</ul>
+</li>
+<li>Techeniques for performing I/O operations:<ul>
+<li>Data transferrd through processor<ul>
+<li>Programmed I/O: the processor issues I/O commands and busy waits for them to complete before proceeding.</li>
+<li>Interrupt-driven I/O: the processor issues I/O commands and proceeds its execution until interrupts come. </li>
+</ul>
+</li>
+<li>Data directly transferrd between the memory and the I/O module<ul>
+<li>Direct memory access (DMA): the DMA module controls the exchange of data between main memory and an I/O module. the processor is involved only at the beginning and end of the whole process. Interrupts are used.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Evolution of I/O functions<ul>
+<li>the processor directly controls the I/O device</li>
+<li>the processor uses programmed I/O (without interrupts) provided by I/O modules</li>
+<li>the processor uses programmed I/O (with interrupts) provided by I/O modules</li>
+<li>the I/O module exchanges data via DMA</li>
+<li>the I/O module begins to have its own processor and specialised I/O instructions</li>
+<li>the I/O module begins to have a local memory of its own, in fact, a tiny computer in its own right.</li>
+</ul>
+</li>
+</ul>
+<h3 id="dma-p509">DMA p509</h3>
+<ul>
+<li>Working process:<ul>
+<li>the processor sends to the DMA module the following information<ul>
+<li>read/write operation <em>via control line</em></li>
+<li>the address of the I/O device <em>via data lines</em></li>
+<li>the starting location in memory <em>via data lines</em></li>
+<li>the number of words <em>via data lines</em></li>
+</ul>
+</li>
+<li>the processor continues with other work while the DMA is transferring data</li>
+<li>the DMA module sends an interrupt to the processor on completion of the transfer.</li>
+</ul>
+</li>
+<li>DMA modules and the system bus<ul>
+<li>The processor-memory bus (system bus) is shared with DMA-memory path. Therefore, when data are transferred between DMA modules and the main memory, the processor has to wait if it needs to exchange data with the memory.</li>
+</ul>
+</li>
+</ul>
+<h3 id="logical-structures-of-the-io-function-p512">Logical Structures of the I/O Function p512</h3>
+<ul>
+<li>Local peripheral device</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Layer name</th>
+<th>Functions</th>
+<th>Techniques used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User processes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Logical I/O</td>
+<td>manages general I/O functions on behalf of user processes, allowing them to use device identifiers and simple commands like open, close, read and write to control the device</td>
+<td></td>
+</tr>
+<tr>
+<td>Device I/O</td>
+<td>converts requested operations and data to sequences of I/O instructions, channel commands and control orders</td>
+<td>buffering</td>
+</tr>
+<tr>
+<td>Scheduling &amp; control</td>
+<td>interacts with the hardware and perform real I/O operations</td>
+<td>interrupts</td>
+</tr>
+<tr>
+<td>Hardware</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Communication port</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Layer name</th>
+<th>Functions</th>
+<th>Techniques used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User processes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Communication architecture</td>
+<td>consists of a number of sub-layers, lower layers provide services to adjacent upper layers</td>
+<td>TCP, IP, HTTP...</td>
+</tr>
+<tr>
+<td>Device I/O</td>
+<td>converts requested operations and data to sequences of I/O instructions, channel commands and control orders</td>
+<td>buffering</td>
+</tr>
+<tr>
+<td>Scheduling &amp; control</td>
+<td>interacts with the hardware and perform real I/O operations</td>
+<td>interrupts</td>
+</tr>
+<tr>
+<td>Hardware</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>File system</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Layer name</th>
+<th>Functions</th>
+<th>Techniques used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User processes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Directory management</td>
+<td>converts symbolic file names to identifiers and provides the user with directory operations like add, delete and reorganise</td>
+<td></td>
+</tr>
+<tr>
+<td>File system</td>
+<td>deals with logical structures of files and provides file operations like open, close, read, write and access control.</td>
+<td></td>
+</tr>
+<tr>
+<td>Physical organisation</td>
+<td>converts logical addresses to phisical ones and controls the allocation of storage space and main storage buffers</td>
+<td>virtual addressing, buffering</td>
+</tr>
+<tr>
+<td>Device I/O</td>
+<td>converts requested operations and data to sequences of I/O instructions, channel commands and control orders</td>
+<td>buffering</td>
+</tr>
+<tr>
+<td>Scheduling &amp; control</td>
+<td>interacts with the hardware and perform real I/O operations</td>
+<td>interrupts</td>
+</tr>
+<tr>
+<td>Hardware</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="io-buffering-p514">I/O Buffering p514</h3>
+<ul>
+<li>block-oriented device: stores information in blocks that are usually of fixed size and transfers are made one block a time: disks, USB keys ...</li>
+<li>stream-oriented device: transfers data as a stream of bytes, with no block structure: terminals, printers, communication ports, mouse ...</li>
+</ul>
+<p>T: input time of one block<br/>
+C:computation time intervenes between input requests<br/>
+M:time required to move the data from the system buffer to user memory  </p>
+<table>
+<thead>
+<tr>
+<th>Buffer type</th>
+<th>Description</th>
+<th>Execution time per block</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single buffer</td>
+<td>Input transfers are made to the system buffer. The process moves the block into user space and immediately requests another block. The process can process one block of data while the next block is being read in.</td>
+<td>max(C, T) + M</td>
+</tr>
+<tr>
+<td>Double buffer (buffer swapping)</td>
+<td>a process transfers data to or from one buffer while the operating system empties or fills the other one, which smooths out the flow of data between an I/O device and a process</td>
+<td>max(C,T)</td>
+</tr>
+<tr>
+<td>circular buffer</td>
+<td>More than two buffers are used to help I/O operations keep up with the process, analogue to the bounded-buffer producer/consumer model</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>advantages of buffering<ul>
+<li>increase the efficiency of the OS</li>
+<li>increase the performance of individual processes</li>
+</ul>
+</li>
+<li>limits of buffering<ul>
+<li>no amount of buffering will allow an I/O device to keep pace with a process indefinitely.</li>
+</ul>
+</li>
+</ul>
+<h3 id="disk-scheduling-p517">Disk Scheduling p517</h3>
+<ul>
+<li>disk performance metrics<ul>
+<li>Timing of a disk I/O transfer<ul>
+<li>T = T(waiting for device) + T(Waiting for channel) + T(Total average access)</li>
+<li>T(Total average access) = T(Seek) + T(<strong>AVERAGE</strong> Rotation delay) + T(Data transfer) = T(Seek) + $\frac{1}{2r}$ + $\frac{b}{Nr}$, where r = rotation speed (unit: rps), b = number of bytes to be transferred, N = number of bytes on a track.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>disk scheduling algorithms<ul>
+<li>
+<p>selection accorfing to requestor</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FIFO</td>
+<td>first-in-first-out</td>
+<td>fairest policy</td>
+</tr>
+<tr>
+<td>PRI</td>
+<td>priority by process</td>
+<td>control outside of disk queue management</td>
+</tr>
+<tr>
+<td>LIFO</td>
+<td>last-in-first-out</td>
+<td>maximise locality and resource utilisation, prone to starvation</td>
+</tr>
+<tr>
+<td>- selection according to requested item</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Remarks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SSTF</td>
+<td>shortest-service-time first</td>
+<td>high utilisation, small queues</td>
+</tr>
+<tr>
+<td>SCAN</td>
+<td>back-and-forth over disk</td>
+<td>better service distribution</td>
+</tr>
+<tr>
+<td>C-SCAN</td>
+<td>one way with fast return</td>
+<td>lower service variability</td>
+</tr>
+<tr>
+<td>N-step-SCAN</td>
+<td>SCAN for N records at a time</td>
+<td>service guarantee, overcomes "arm-stickiness"</td>
+</tr>
+<tr>
+<td>FSCAN</td>
+<td>N-step-SCAN with N = queue size at the beginning of SCAN cycle</td>
+<td>load sensitive</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="raid-p524">RAID p524</h3>
+<p>redundant array of independent discs  </p>
+<p><img class="width-500px" src="/articles/Notes on Operating Systems/RAID levels 0-4.png"/></p>
+<p class="caption-of-img-or-table">RAID levels 0-4</p>
+<p><br/></p>
+<p><img class="width-500px" src="/articles/Notes on Operating Systems/RAID levels 5-6.png"/></p>
+<p class="caption-of-img-or-table">RAID levels 5-6</p>
+<table>
+<thead>
+<tr>
+<th>RAID Level</th>
+<th>Discs Needed</th>
+<th>Data Availability</th>
+<th>Large I/O Transfer Capacity</th>
+<th>Small I/O Request Rate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAID0 (nonredundant)</td>
+<td>N</td>
+<td>lower than single disc</td>
+<td>very high</td>
+<td>very high for both read and write</td>
+</tr>
+<tr>
+<td>RAID1 (mirrored)</td>
+<td>2N</td>
+<td>higher than RAID 2,3,4,5, lower than RAID 6</td>
+<td>higher than single disc for read, similar to single disc for write</td>
+<td>up tp twice that of a single disc for read, similar to single disc for write</td>
+</tr>
+<tr>
+<td>RAID2 (redundant via Hamming code)</td>
+<td>N+m</td>
+<td>much higher than single disc, comparable to RAID 3,4,5</td>
+<td>highest</td>
+<td>Approximately twice that of a single disc</td>
+</tr>
+<tr>
+<td>RAID3 (Bit-interleaved parity)</td>
+<td>N+1</td>
+<td>much higher than single disc, comparable to RAID 2,4,5</td>
+<td>highest</td>
+<td>Approximately twice that of a single disc</td>
+</tr>
+<tr>
+<td>RAID4 (block-interleaved parity)</td>
+<td>N+1</td>
+<td>much higher than single disc, comparable to RAID 2,3,5</td>
+<td>similar to RAID 0 for read, significantly lower than single disc for write</td>
+<td>similar to RAID0 for read, significantly lower than single disc for write</td>
+</tr>
+<tr>
+<td>RAID5 (block-interleaved distributed parity)</td>
+<td>N+1</td>
+<td>much higher than single disc, comparable to RAID 2,3,4</td>
+<td>similar to RAID 0 for read, lower than single disc for write</td>
+<td>similar to RAID 0 for read, generally lower than single disc for write</td>
+</tr>
+<tr>
+<td>RAID6 (block-interleaved dual distributed parity)</td>
+<td>N+2</td>
+<td>highest</td>
+<td>similar to RAID 0 for read, lower than RAID 5 for write</td>
+<td>similar to RAID 0 for read, significantly lower than RAID 5 for write</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>RAID 6 data check algorithms<ul>
+<li>P code: exclusive-OR operations same as RAID 3,4,5</li>
+<li>Q code: an independent data check algorithm more complicated than simple exclusive-OR operations. the algorithm makes use of polynomials and operations on a Galois Field.</li>
+</ul>
+</li>
+</ul>
+<h3 id="disk-cache">Disk Cache</h3>
+<ul>
+<li>LRU (omitted)</li>
+<li>LFU (omitted)</li>
+<li>Frequency-based Replacement<ul>
+<li>Algorithm description<ul>
+<li>A certain portion of the top part of the stack is designated the new section.</li>
+<li>When there is a cache hit, the referenced block is moved to the stack top and if the block was already in the new section, its reference count remains unchanged, otherwise it is incremented by 1.</li>
+<li>When there is a cache miss, the block with the smallest reference count that is not in the new section is chosen for replacement.</li>
+</ul>
+</li>
+<li>Improvement<ul>
+<li>Divide the stack into three sections: new, middle and old. The algorithm does not change except that when there is a cache miss, only the block in the old section can be swapped out.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="file-management">File Management</h2>
+<h3 id="logical-file-structures">Logical File Structures</h3>
+<ul>
+<li>field<ul>
+<li>a field is a basic element of data</li>
+</ul>
+</li>
+<li>record<ul>
+<li>a record is a collection of related fields that can be treated as a unit by some application program</li>
+</ul>
+</li>
+<li>file<ul>
+<li>a file is a collection of similar records</li>
+<li>some files may be only structured in terms of fields</li>
+</ul>
+</li>
+<li>database<ul>
+<li>a database is a collection of related data</li>
+</ul>
+</li>
+<li>not all file systems use such a structure</li>
+</ul>
+<h3 id="file-system-software-structure">File System Software Structure</h3>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Description</th>
+<th>Position</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user programs</td>
+<td>uses the file system</td>
+<td></td>
+</tr>
+<tr>
+<td>access methods</td>
+<td>files of different structures: pile, sequential, indexed sequential, indexed, hashed...</td>
+<td>link user programs with underlying layers</td>
+</tr>
+<tr>
+<td>logical I/O</td>
+<td>enables users and applications to access records</td>
+<td></td>
+</tr>
+<tr>
+<td>basic I/O supervisor</td>
+<td>is responsible for all file I/O initiation and termination, also controls the scheduling to optimise performance</td>
+<td>part of the OS</td>
+</tr>
+<tr>
+<td>basic file system (physical I/O)</td>
+<td>deals with blocks of data that are exchanged with disk or tape system</td>
+<td>part of the OS</td>
+</tr>
+<tr>
+<td>device drivers</td>
+<td>communicate directly with peripheral devices or their controllers or channels</td>
+<td>part of the OS</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>users and applications are concerned with records or fields, I/O is done on a block basis.</li>
+</ul>
+<h3 id="file-organisation">File Organisation</h3>
+<p>we use the term <em>file organisation</em> to refer to the local structuring of the records as determined by the way in which they are accessed.
+- the pile
+    - data are collected in the order they arrive
+    - records may have different fields, thus each field should be self-describing
+    - record access is by exhaustive search
+- the sequential file
+    - all records are of the same length, consisting of the same number of fixed-length fields in a particular order
+    - there is a <strong>key field</strong> by which the records are sorted
+    - the only one organisation that is easily stored on tape as well as disk
+    - new records are usually put in an assisting log file. they will be merged into the sequential file sometime afterwards.
+    - exhaustive search
+- the indexed sequential file
+    - records are organised in sequence based on a key field.
+    - index provides a quick lookup capability to reach the vicinity of a desired record
+- the indexed file
+    - index is not limited to only the key field
+    - there may be partial indexes contains entries to records where the field of interest exists
+- the direct or hashed file 
+    - used when very rapid access is required, where fixed-length records are used and where records are always accessed one at a time</p>
+<h3 id="b-trees">B-Trees</h3>
+<ul>
+<li>Definition<ul>
+<li>the tree consists of a number of nodes and leaves</li>
+<li>each node contains at least one key which uniquely identifies a file record, and more than one pointer to child nodes or leaves.</li>
+<li>each node is limited to the same number of maximum keys</li>
+<li>the keys in a node are stored in nondecreasing order</li>
+<li>each key has an associated child that is the root of a subtree containing all nodes with keys <strong>less than or equal to</strong> the key but <strong>greater than</strong> the preceding key.</li>
+<li>a B-tree is characterised by its minimum degree $d$</li>
+<li>each node has at most $2d - 1$ keys and $2d$ children</li>
+<li>every node, except for the root, has at least $d-1$ keys and $d$ pointers.</li>
+<li>the root has at least 1 key and 2 children</li>
+<li>all leaves appear on the same level and contain no information. null pointers may be used to mark the bottom-level node</li>
+<li>a nonleaf node with $k$ pointers contrains $k - 1$ keys</li>
+</ul>
+</li>
+<li>search the tree<ul>
+<li>if the key you want is less than the smallest key in the node, take the leftmost pointer down to the next level</li>
+<li>if the key you want is greater than the largest key in the node, take the rightmost pointer down to the next level
+ -if the value of the key is between the values of two adjacent keys in this node, take the pointer between these keys down to the next level</li>
+</ul>
+</li>
+<li>insert new nodes<ul>
+<li>search the tree for the key. if the key is not in the tree, then you have reached a node at the lowest level</li>
+<li>if this node has fewer than $2d-1$ keys, then insert the key into this node in the proper sequence</li>
+<li>if the node is full, then split this node around its median key into two new nodes with $d - 1$ keys each and <strong>promote</strong> the median key to the next higher level</li>
+<li>the promoted node is inserted into the parent node following the rules above.</li>
+<li>if the process goes to the root node, then split it and the tree height increases by 1.</li>
+</ul>
+</li>
+</ul>
+<h3 id="file-directories-file-sharing">File Directories &amp; File Sharing</h3>
+<ul>
+<li>the directory is itself a file, accessible by various file management routines</li>
+<li>the directory can be structured to a simple list of file entries, or it can be designed as a more powerful tree structure</li>
+<li>an interactive user or process has associated with it a current directory, often referred to as the working directory</li>
+<li>the file owner, usually the one that created the file, has all of the access rights and may grant rights to others</li>
+<li>simultaneous access to a file can be controlled by locking individual records of the file during update, where issues of mutual exclusion and deadlock must be addressed</li>
+</ul>
+<h3 id="record-blocking-secondary-storage-management">Record Blocking &amp; Secondary Storage Management</h3>
+<ul>
+<li>on most systems, blocks are of fixed length.</li>
+<li>record blocking methods<ul>
+<li>fixed blocking<ul>
+<li>an integral number of records are stored in a block. internal fragmentation may appear</li>
+</ul>
+</li>
+<li>variable-length spanned blocking<ul>
+<li>variable-length blocks are used. some records may span 2 blocks</li>
+</ul>
+</li>
+<li>variable-length unspanned blocking<ul>
+<li>variable-length blocks are used, but spanning is not allowed, causing wasted space.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>file allocation<ul>
+<li>a <strong>portion</strong> is a set of allocated blocks</li>
+<li>a <strong>file allocation table (FAT)</strong> is a structure used to keep track of the portions allocated to a file</li>
+<li>preallocation of portions needs to the maximum size of the file, while dynamic allocation methods have more flexibility</li>
+<li>variable, large contiguous portions avoids waste, and the file allocation table is small, but the space is hard to reuse. blocks are small fixed portions and provide greater flexibility.</li>
+<li>with variable-size portions, some allocation strategies can be used: first fit, best fit (smallest sufficient one) and nearest fit(choose one that is closest to the previously allocated portion). however, it it <strong>not clear</strong> which is best.</li>
+<li>contiguous allocation may result in external fragments (similar to that in memory allocation), but chained allocation (blocks linked by pointers) is an alternative. however, chained allocation does not provide the file with locality. to solve this problem, some system peroidically consolidate files. indexed allocation solves many problems of those two methods. in indexed allocation, a file has a block to keep indexes of each data block. File consolidation may reduce the size of the index in the case of variable-size portions but not in the case of block allocation</li>
+</ul>
+</li>
+<li>free space management<ul>
+<li>a disk allocation table keeps information of available blocks</li>
+<li>bit tables<ul>
+<li>one bit for each block on the disc</li>
+<li>relatively easy to find one or contiguous group of free block</li>
+<li>a bit table is as small as possible</li>
+<li>the amount of memory bytes required for a block bitmap is 
+    $$ \frac{\text{disk size in bytes}}{8\times \text{file system block size in bytes}}$$</li>
+<li>an exhaustive search of the table can slow the file system performance</li>
+</ul>
+</li>
+<li>chained free portions<ul>
+<li>free portions are linked by pointers</li>
+<li>space overhead is negligible</li>
+<li>if many individual blocks need to be allocated at one time, or highly fragmented files are deleted, the performance may not be good</li>
+</ul>
+</li>
+<li>indexing<ul>
+<li>for efficiency, the index should be on the basis of variable portions rather than blocks</li>
+</ul>
+</li>
+<li>free block list<ul>
+<li>the list can be treated as a push-down stack, with the first few thousand elements of the stack kept in main memory</li>
+<li>the list can be treated as a FIFO queue, with a few thousand entries from both the head and the tail of the queue in main memory.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>volume<ul>
+<li>in essence, a volume is a logical disk</li>
+<li>a volume may be the result of assembling and merging smaller volumes</li>
+</ul>
+</li>
+<li>some reliability issues<ul>
+<li>system crash may result in an allocated block re-allocated to another file, causing conficts.</li>
+<li>inconsistency between the disk and the memory should be considered when designing high-performance file systems</li>
+</ul>
+</li>
+</ul>
+        </div><!-- /.entry-content -->
+</div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="span12">
+          <div id="id_footer_pagebottom">
+            <p><strong>&copy;Piyi Zu.&nbsp;&nbsp;&nbsp;&nbsp;</strong><span>Website generated at 2024-10-04T20:13:54+0800</span></p>
+            <p>Follow the links to the full list of <a href="/pages/Acknowledgements%20and%20Licences/index.html#acknowledgements">acknowledgements</a> and <a href="/pages/Acknowledgements%20and%20Licences/index.html#licences">licences</a></p>
+            <p>This work is licensed under 
+              <a href="http://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-ND 4.0</a>
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/cc.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/by.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nc.svg">
+              <img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="/static_img/creative_commons/nd.svg"></p>
+          </div><!-- /#about -->
+        </div><!-- /#contentinfo -->
+      </div>
+    </div>
+
+
+  </body>
+</html>
